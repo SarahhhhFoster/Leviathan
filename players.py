@@ -16,8 +16,11 @@ class Player:
       self._decks[draw_to_deck] = cards.CardDeck(name = draw_to_deck)
     self._decks[draw_to_deck].add_card(deck.draw())
 
-  def play_from_hand(self, index):
-    return(self._decks["hand"].play(index))
+  def play_from_deck(self, index, deck = "hand"):
+    return(self._decks[deck].play(index))
+
+  def read_from_deck(self, index, deck = "hand"):
+    return(self._decks[deck].read_card(index))
 
 class PlayerGroup:
   def __init__(self, players, first_player = 0, default_decks = {"hand": cards.CardDeck(name="Hand")}):

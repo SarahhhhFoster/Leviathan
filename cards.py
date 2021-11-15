@@ -79,8 +79,16 @@ class CardDeck:
       raise CardDeck.EmptyDeck("Can't draw from an empty card deck.")
 
   def play(self, index):
-    if index < len(self._cards) and index > 0:
+    if index < len(self._cards) and index >= 0:
       return(self._cards.pop(index))
+    elif index > 0:
+      raise CardDeck.OutOfRange(f"Card not available to play. Trying to access {index} but maximum is {len(self._cards) - 1}.")
+    else:
+      raise CardDeck.OutOfRange(f"Card not available to play. Trying to access {index} but must be greater than zero.")
+
+  def read_card(self, index):
+    if index < len(self._cards) and index >= 0:
+      return(self._cards[index])
     elif index > 0:
       raise CardDeck.OutOfRange(f"Card not available to play. Trying to access {index} but maximum is {len(self._cards) - 1}.")
     else:
