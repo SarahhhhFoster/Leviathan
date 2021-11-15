@@ -1,29 +1,34 @@
+import copy
 import cards
 
 class Player:
-  def __init__(self, name, score = 0):
+  def __init__(self, name, score = 0, decks = {"hand": cards.CardDeck(name="Hand")}):
     self.name = name
-    self._hand = cards.CardDeck(name = f"{self.name}'s Hand")
+    self._decks = decks
     self._score = score
 
   def __repr__(self):
-    return(f"Player: {self.name}\n{self._hand}")
+    decks_string = '\n'.join(map(lambda x: str(x), self._decks.values()))
+    return(f"Player: {self.name}\n{decks_string}")
 
-  def draw_from(self, deck):
-    self._hand.add_card(deck.draw())
+  def draw_from(self, deck, draw_to_deck = "hand"):
+    if not draw_to_deck in self._decks:
+      self._decks[draw_to_deck] = cards.CardDeck(name = draw_to_deck)
+    self._decks[draw_to_deck].add_card(deck.draw())
 
   def play_from_hand(self, index):
-    return(self._hand.play(index))
+    return(self._decks["hand"].play(index))
 
 class PlayerGroup:
-  def __init__(self, players, first_player = 0):
-    self._players = list(map(lambda x: Player(x), players))
-    self._first_player = 0
+  def __init__(self, players, first_player = 0, default_decks = {"hand": cards.CardDeck(name="Hand")}):
+    self._players = list(map(lambda x: Player(x, decks = copy.deepcopy(default_decks)), players))
+    self._current_player = 0
     if 0 <= first_player and first_player < len(self._players):
-      self._first_player = first_player
+      self._current_player = first_player
     else:
       raise PlayerGroup.OutOfRange(f"{first_player} is not a valid index for first player; must be between zero and {len(self._players) -1}.")
     self._index = -1
+    self._direction = 1
 
   def __repr__(self):
     return_string = []
@@ -42,10 +47,30 @@ class PlayerGroup:
     else:
       return self._players[self._index]
 
-  def deal_cards_from(self, deck, hand_size):
+  def __getitem__(self, item):
+    return(self._players[item])
+
+  def deal_cards_from(self, deck, hand_size, to_deck = "hand"):
+    if deck.get_card_count() < (len(self._players) * hand_size):
+      raise PlayerGroup.OutOfRange(f"Not enough cards in deck to deal {hand_size} cards to each player.")
     for i in range(hand_size):
       for player in self._players:
-        player.draw_from(deck)
+        player.draw_from(deck, draw_to_deck = to_deck)
+
+  def pass_turn(self):
+    if self._current_player < (len(self._players) - 1):
+      self._current_player += self._direction
+    else:
+      self._current_player = 0
+
+  def change_direction(self):
+    self._direction *= -1
+
+  def get_current_player(self):
+    return(self._players[self._current_player])
+
+  def get_offset_player(self, offset):
+    return(self._players[(self._current_player + offset) % len(self._players)])
 
   class OutOfRange(Exception):
     def __init__(self, message):
