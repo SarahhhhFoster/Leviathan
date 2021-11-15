@@ -1,11 +1,12 @@
 import random
 
 class Card:
-  def __init__(self, name, description, back_name = "", back_description = ""):
+  def __init__(self, name, description, back_name = "", back_description = "", attrs = {}):
     self.name = name
     self.description = description
     self.back_name = back_name
     self.back_description = back_description
+    self._attrs = attrs
 
   def __repr__(self):
     return(f"{self.name}: {self.description}")
@@ -19,6 +20,12 @@ class Card:
   def flip(self):
     self.name, self.description = self.back_name, self.back_description
 
+  def get_attr(self, attr_name):
+    return(self._attrs[attr_name])
+
+  def set_attr(self, attr_name, attr_val):
+    self._attrs[attr_name] = attr_val
+
 class CardDeck:
   def __init__(self, deck_in = [], name = None):
     self._cards = []
@@ -27,18 +34,28 @@ class CardDeck:
     for card in deck_in:
       if len(card) == 2:
         self._cards.append(Card(card[0], card[1]))
+      elif len(card) == 3:
+        self._cards.append(Card(card[0], card[1], attrs = card[2]))
       elif len(card) == 4:
         self._cards.append(Card(card[0], card[1], card[2], card[3]))
+      elif len(card) == 5:
+        self._cards.append(Card(card[0], card[1], card[2], card[3], attrs = card[4]))
 
   def __repr__(self):
     return_string = []
     if type(self.name) != type(None):
       return_string.append(f"{self.name}:")
-    for i in range(len(self._cards)):
+    if len(self._cards) == 0:
       if type(self.name) != type(None):
-        return_string.append(f"\t{i}: {self._cards[i]}")
+        return_string.append("\tDeck empty")
       else:
-        return_string.append(f"{i}: {self._cards[i]}")
+        return_string.append("Deck empty")
+    else:
+      for i in range(len(self._cards)):
+        if type(self.name) != type(None):
+          return_string.append(f"\t{i}: {self._cards[i]}")
+        else:
+          return_string.append(f"{i}: {self._cards[i]}")
     return("\n".join(return_string))
 
   def __iter__(self):
@@ -68,6 +85,9 @@ class CardDeck:
       raise CardDeck.OutOfRange(f"Card not available to play. Trying to access {index} but maximum is {len(self._cards) - 1}.")
     else:
       raise CardDeck.OutOfRange(f"Card not available to play. Trying to access {index} but must be greater than zero.")
+
+  def get_card_count(self):
+    return(len(self._cards))
 
   def add_card(self, card):
     self._cards.append(card)
