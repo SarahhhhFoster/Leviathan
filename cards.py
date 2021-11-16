@@ -18,7 +18,9 @@ class Card:
     return(self.description)
 
   def flip(self):
+    temp_values = [self.name, self.description]
     self.name, self.description = self.back_name, self.back_description
+    self.back_name, self.back_description = temp_values
 
   def get_attr(self, attr_name):
     return(self._attrs[attr_name])
