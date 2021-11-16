@@ -1,26 +1,8 @@
+#!/usr/bin/env python3
 import cards
 import players
-from itertools import repeat
+from itertools import combinations
 import random
-import urwid
-
-def menu(title, choices):
-    body = [urwid.Text(title), urwid.Divider()]
-    for c in choices:
-        button = urwid.Button(c)
-        urwid.connect_signal(button, 'click', item_chosen, c)
-        body.append(urwid.AttrMap(button, None, focus_map='reversed'))
-    return urwid.ListBox(urwid.SimpleFocusListWalker(body))
-
-def item_chosen(button, choice):
-    response = urwid.Text([f"OK.\n"])
-    done = urwid.Button(u'Ok')
-    urwid.connect_signal(done, 'click', exit_program)
-    main.original_widget = urwid.Filler(urwid.Pile([response,
-        urwid.AttrMap(done, None, focus_map='reversed')]))
-
-def exit_program(button):
-    raise urwid.ExitMainLoop()
 
 random.seed()
 
@@ -37,17 +19,24 @@ random.seed()
 
 divination_repeats = 5
 
-divination_deck = cards.CardDeck(
-  list(repeat(["The Scholar", "Give two times the power level in points to the terminal player.", "The Fool", "Take two times the power level in points from the terminal player."], divination_repeats)) +
-  list(repeat(["The Baron", "Give the power level in points to adjacent players.", "The Pauper", "Take the power level in points from adjacent players."], divination_repeats)) +
-  list(repeat([
+divination_deck_list = [
+  ["The Scholar", "Give two times the power level in points to the terminal player.", "The Fool", "Take two times the power level in points from the terminal player."],
+  ["The Baron", "Give the power level in points to adjacent players.", "The Pauper", "Take the power level in points from adjacent players."],
+  [
     "Castor", "Give the power level in points to the player to the left from the terminal player, and take that number from the player to the right.",
-    "Pollux", "Take the power level in points from the player to the left from the terminal player, and give that number to the player to the right."], divination_repeats)) +
-  list(repeat([
+    "Pollux", "Take the power level in points from the player to the left from the terminal player, and give that number to the player to the right."],
+  [
     "The Gambler", "Flip a coin. If it's heads, give twice the power level in points to the terminal player. If tails, give the power level to each adjacent.",
-    "Fate", "The terminating player must choose another player, then flip a coin. The total points change is double the power level, and the other player gains or loses points on heads or tails respectively."], divination_repeats)) +
-  list(repeat(["Waxing Crescent", "All players but the terminal player gain a point.", "Waning Gibbous", "All players but the terminal player lose a point."], divination_repeats)),
-  name = "Divination Deck")
+    "Fate", "The terminating player must choose another player, then flip a coin. The total points change is double the power level, and the other player gains or loses points on heads or tails respectively."],
+  ["Waxing Crescent", "All players but the terminal player gain a point.", "Waning Gibbous", "All players but the terminal player lose a point."]
+]
+
+divination_cards = []
+for i in range(divination_repeats):
+  for div_description in divination_deck_list:
+    divination_cards.append(div_description)
+
+divination_deck = cards.CardDeck(divination_cards, name = "Divination Deck")
 divination_deck.shuffle()
 
 # Players should be able to, as professional powers:
@@ -55,63 +44,96 @@ divination_deck.shuffle()
 # * Subtract from power
 # * Reverse direction
 # * Flip the divination
-# * End round
+# * Set the divination countdown
+# * Summon a spirit
 
-class_repeats = 2
-
-class_deck = cards.CardDeck(
-  list(repeat(["Numerologist", "The numerologist can increase or decrease the power of a divination by one point.", {"can": ["powerup", "powerdown"]}], class_repeats)) +
-  list(repeat(["Palmist", "The palm reader can increase the power of a divination by one point or reverse the direction of play.", {"can": ["powerup", "reverse"]}], class_repeats)) +
-  list(repeat(["Clairvoyant", "The clairvoyant can increase the power of a divination by one point or reverse the divination card.", {"can": ["powerup", "flip"]}], class_repeats)) +
-  list(repeat(["Personage", "The personage can increase the power of a divination by one point or end the divination round.", {"can": ["powerup", "end"]}], class_repeats)) +
-  list(repeat(["Thelemite", "The thelemite can decrease the power of a divination by one point or reverse the direction of play.", {"can": ["powerdown", "reverse"]}], class_repeats)) +
-  list(repeat(["Haruspex", "The haruspex can decrease the power of a divination by one point or reverse the divination card.", {"can": ["powerdown", "flip"]}], class_repeats)) +
-  list(repeat(["Exorcist", "The exorcist can decrease the power of a divination by one point or end the divination round.", {"can": ["powerdown", "end"]}], class_repeats)) +
-  list(repeat(["Theosophist", "The theosophist can reverse the direction of play or reverse the divination card.", {"can": ["reverse", "flip"]}], class_repeats)) +
-  list(repeat(["Thaumaturge", "The thaumaturge can reverse the direction of play or end the divination round.", {"can": ["reverse", "end"]}], class_repeats)) +
-  list(repeat(["Demonologist", "The demonologist can reverse the divination card or end the divination round.", {"can": ["flip", "end"]}], class_repeats)),
-  name = "Profession Deck")
+# I've refactored the generation of the profession deck out a bit to
+# avoid some repetition and make it a little more concise component by
+# component, at the expense of it being a little harder to grok.
 
 power_descriptions = {
   "powerup": {
-    "name": "Increase power",
-    "long_desc": "Add one point to the power of the current divination."
+    "name": "increase power",
+    "long_desc": "add one point to the power of the current divination"
   },
   "powerdown": {
-    "name": "Decrease power",
-    "long_desc": "Remove one point from the power of the current divination."
+    "name": "decrease power",
+    "long_desc": "remove one point from the power of the current divination"
   },
   "reverse": {
-    "name": "Reverse play",
-    "long_desc": "Reverse the direction of turn-passing play."
+    "name": "reverse play",
+    "long_desc": "reverse the direction of turn-passing play"
   },
   "flip": {
-    "name": "Reverse divination",
-    "long_desc": "Flip the divination card to reverse its nature."
+    "name": "reverse divination",
+    "long_desc": "flip the divination card to reverse its nature"
   },
-  "end": {
-    "name": "End round",
-    "long_desc": "End the current divination round."
+  "setcount": {
+    "name": "set the countdown",
+    "long_desc": "set the divination countdown to the current number of players"
+  },
+  "summon": {
+    "name": "summon a spirit",
+    "long_desc": "play a card from the spirit deck"
   }
 }
 
-class_deck.shuffle()
+# This generates a list of all combinations of powers taken two at a
+# time, then I map each combination to a named profession below that. If
+# I missed any combination this will error out, which is good and fine.
 
-demo_group = players.PlayerGroup(["Sarah", "Jaala", "Kirstin", "Jessica"], default_decks = {"profession": cards.CardDeck(name="Profession")})
-demo_group.deal_cards_from(class_deck, 1, "profession")
+power_combinations = list(map(
+  lambda y: "-".join(y), list(combinations(power_descriptions.keys(), 2))))
+
+professions = {
+  "powerup-powerdown": "numerologist",
+  "powerup-reverse": "palmist",
+  "powerup-flip": "clairvoyant",
+  "powerup-setcount": "personage",
+  "powerup-summon": "glossolalist",
+  "powerdown-reverse": "Thelemite",
+  "powerdown-flip": "haruspex",
+  "powerdown-setcount": "exorcist",
+  "powerdown-summon": "demonologist",
+  "reverse-flip": "theosophist",
+  "reverse-setcount": "thaumaturge",
+  "reverse-summon": "Fortean",
+  "flip-setcount": "Hermeticist",
+  "flip-summon": "necromancer",
+  "setcount-summon": "doomsayer"
+}
+
+# This takes the above descriptors and converts them into longer-form
+# card descriptions
+
+class_repeats = 2
+profession_deck_list = []
+for profession_powers in power_combinations:
+  abilities = profession_powers.split("-")
+  class_name = professions[profession_powers]
+  prof_power_descs = list(map(lambda x: power_descriptions[x]["long_desc"], abilities))
+  for i in range(class_repeats):
+    profession_deck_list.append(
+      [
+        class_name.capitalize(),
+        f"A {class_name} can {prof_power_descs[0]} or {prof_power_descs[1]}.",
+        {"can": abilities}
+      ]
+    )
+profession_deck = cards.CardDeck(profession_deck_list, name = "Profession Deck")
+profession_deck.shuffle()
+
+play_group = players.PlayerGroup(["Sarah", "Jaala", "Kirstin", "Jessica"], default_decks = {"profession": cards.CardDeck(name="Profession")})
+play_group.deal_cards_from(profession_deck, 1, "profession")
 
 current_card = divination_deck.draw()
 if(random.randint(0,1)):
   current_card.flip()
 
-current_player = demo_group.get_current_player()
+for player in play_group:
+  print(player)
+
+current_player = play_group.get_current_player()
 current_profession = current_player.read_from_deck(0, deck = "profession")
-main = urwid.Padding(
-  menu(f"Player {current_player.name}, {current_profession.name}, what would you like to do?",
-  map(lambda x: ("* " if (x in current_profession.get_attr("can")) else "  ") + power_descriptions[x]['name'], power_descriptions.keys())),
-  left=2, right=2)
-top = urwid.Overlay(main, urwid.SolidFill(u'\N{MEDIUM SHADE}'),
-    align='center', width=('relative', 60),
-    valign='middle', height=('relative', 60),
-    min_width=20, min_height=9)
-urwid.MainLoop(top, palette=[('reversed', 'standout', '')]).run()
+current_action = None
+
