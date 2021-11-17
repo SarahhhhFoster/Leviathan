@@ -60,6 +60,9 @@ class PlayerGroup:
       for player in self._players:
         player.draw_from(deck, draw_to_deck = to_deck)
 
+  def get_player_count(self):
+    return(len(self._players))
+
   def pass_turn(self):
     if self._current_player < (len(self._players) - 1):
       self._current_player += self._direction
