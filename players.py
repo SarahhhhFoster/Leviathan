@@ -22,6 +22,9 @@ class Player:
   def read_from_deck(self, index, deck = "hand"):
     return(self._decks[deck].read_card(index))
 
+  def add_to_score(self, add):
+    self._score += add
+
 class PlayerGroup:
   def __init__(self, players, first_player = 0, default_decks = {"hand": cards.CardDeck(name="Hand")}):
     self._players = list(map(lambda x: Player(x, decks = copy.deepcopy(default_decks)), players))
@@ -63,6 +66,9 @@ class PlayerGroup:
   def get_player_count(self):
     return(len(self._players))
 
+  def get_player_names(self):
+    return(list(map(lambda x: x.name, self._players)))
+
   def pass_turn(self):
     if self._current_player < (len(self._players) - 1):
       self._current_player += self._direction
@@ -74,6 +80,11 @@ class PlayerGroup:
 
   def get_current_player(self):
     return(self._players[self._current_player])
+
+  def get_player_by_name(self, name):
+    for p in self._players:
+      if p.name == name:
+        return(p)
 
   def get_offset_player(self, offset):
     return(self._players[(self._current_player + offset) % len(self._players)])
