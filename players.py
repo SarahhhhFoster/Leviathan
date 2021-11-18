@@ -1,5 +1,6 @@
 import copy
 import cards
+import random
 
 class Player:
   def __init__(self, name, score = 0, decks = {"hand": cards.CardDeck(name="Hand")}):
@@ -24,6 +25,11 @@ class Player:
 
   def add_to_score(self, add):
     self._score += add
+    if self._score < 0:
+      self.score = 0
+
+  def get_score(self):
+    return(self._score)
 
 class PlayerGroup:
   def __init__(self, players, first_player = 0, default_decks = {"hand": cards.CardDeck(name="Hand")}):
@@ -56,6 +62,9 @@ class PlayerGroup:
   def __getitem__(self, item):
     return(self._players[item])
 
+  def set_random_starting_player(self):
+    self._current_player = random.randint(0,len(self._players) - 1)
+
   def deal_cards_from(self, deck, hand_size, to_deck = "hand"):
     if deck.get_card_count() < (len(self._players) * hand_size):
       raise PlayerGroup.OutOfRange(f"Not enough cards in deck to deal {hand_size} cards to each player.")
@@ -70,10 +79,8 @@ class PlayerGroup:
     return(list(map(lambda x: x.name, self._players)))
 
   def pass_turn(self):
-    if self._current_player < (len(self._players) - 1):
-      self._current_player += self._direction
-    else:
-      self._current_player = 0
+    self._current_player += self._direction
+    self._current_player %= len(self._players)
 
   def change_direction(self):
     self._direction *= -1
@@ -85,6 +92,9 @@ class PlayerGroup:
     for p in self._players:
       if p.name == name:
         return(p)
+
+  def get_player_by_index(self, index):
+    return(self._players[index])
 
   def get_offset_player(self, offset):
     return(self._players[(self._current_player + offset) % len(self._players)])

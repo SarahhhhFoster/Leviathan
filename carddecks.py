@@ -13,23 +13,48 @@ from itertools import combinations
 divination_deck_list = [
   [
     "The Scholar", "Give two times the power level in points to the terminal player.",
-    "The Fool", "Take two times the power level in points from the terminal player."
+    "The Fool", "Take two times the power level in points from the terminal player.",
+    {"function": {
+      "The Scholar": gameactions.scholar,
+      "The Fool": gameactions.fool
+      }
+    }
   ],
   [
     "The Baron", "Give the power level in points to terminus-adjacent players.",
-    "The Pauper", "Take the power level in points from terminus-adjacent players."
+    "The Pauper", "Take the power level in points from terminus-adjacent players.",
+    {"function": {
+      "The Baron": gameactions.baron,
+      "The Pauper": gameactions.pauper
+      }
+    }
   ],
   [
     "Castor", "Give the power level in points to the player to the left from the terminal player, and take that number from the player to the right.",
-    "Pollux", "Take the power level in points from the player to the left from the terminal player, and give that number to the player to the right."
+    "Pollux", "Take the power level in points from the player to the left from the terminal player, and give that number to the player to the right.",
+    {"function": {
+      "Castor": gameactions.castor,
+      "Pollux": gameactions.pollux
+      }
+    }
   ],
   [
     "The Gambler", "Flip a coin. If it's heads, give twice the power level in points to the terminal player. If tails, give the power level to each adjacent.",
-    "Fate", "The terminating player must choose another player, then flip a coin. The total point change is double the power level, and the other player gains or loses points on heads or tails respectively."
+    "Fate", "The terminating player must choose another player, then flip a coin. The total point change is double the power level, and the other player gains or loses points on heads or tails respectively.",
+    {"function": {
+      "The Gambler": gameactions.gambler,
+      "Fate": gameactions.fate
+      }
+    }
   ],
   [
     "Waxing Crescent", "All players but the terminal player gain a point.",
-    "Waning Gibbous", "All players but the terminal player lose a point."
+    "Waning Gibbous", "All players but the terminal player lose a point.",
+    {"function": {
+      "Waxing Crescent": gameactions.waxing,
+      "Waning Crescent": gameactions.waning
+      }
+    }
   ]
 ]
 
@@ -72,7 +97,7 @@ power_descriptions = {
   },
   "setcount": {
     "name": "set the countdown",
-    "long_desc": "set the divination countdown to the current number of players",
+    "long_desc": "set the divination countdown to the current number of players if it is unset",
     "function": gameactions.setcount
   },
   "summon": {
