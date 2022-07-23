@@ -52,7 +52,7 @@ divination_deck_list = [
     "Waning Gibbous", "All players but the terminal player lose a point.",
     {"function": {
       "Waxing Crescent": gameactions.waxing,
-      "Waning Crescent": gameactions.waning
+      "Waning Gibbous": gameactions.waning
       }
     }
   ]
