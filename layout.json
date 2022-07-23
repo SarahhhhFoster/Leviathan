@@ -1,0 +1,197 @@
+{
+    "professions": {
+        "numerologist": {
+            "abilities": [
+                "powerup",
+                "powerdown"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/numerologist.png"
+        },
+        "palmist": {
+            "abilities": [
+                "powerup",
+                "reverse"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/palmist.png"
+        },
+        "clairvoyant": {
+            "abilities": [
+                "powerup",
+                "flip"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/clairvoyant.png"
+        },
+        "personage": {
+            "abilities": [
+                "powerup",
+                "setcount"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/personage.png"
+        },
+        "glossolalist": {
+            "abilities": [
+                "powerup",
+                "summon"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/glossolalist.png"
+        },
+        "Thelemite": {
+            "abilities": [
+                "powerdown",
+                "reverse"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/thelemite.png"
+        },
+        "haruspex": {
+            "abilities": [
+                "powerdown",
+                "flip"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/haruspex.png"
+        },
+        "exorcist": {
+            "abilities": [
+                "powerdown",
+                "setcount"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/exorcist.png"
+        },
+        "demonologist": {
+            "abilities": [
+                "powerdown",
+                "summon"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/demonologist.png"
+        },
+        "theosophist": {
+            "abilities": [
+                "reverse",
+                "flip"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/theosophist.png"
+        },
+        "thaumaturge": {
+            "abilities": [
+                "reverse",
+                "setcount"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/thaumaturge.png"
+        },
+        "Fortean": {
+            "abilities": [
+                "reverse",
+                "summon"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/fortean.png"
+        },
+        "Hermeticist": {
+            "abilities": [
+                "flip",
+                "setcount"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/hermeticist.png"
+        },
+        "necromancer": {
+            "abilities": [
+                "flip",
+                "summon"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/necromancer.png"
+        },
+        "doomsayer": {
+            "abilities": [
+                "setcount",
+                "summon"
+            ],
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/doomsayer.png"
+        }
+    },
+    "powers": {
+        "powerup": {
+            "name": "increase power",
+            "long_desc": "add one point to the power of the current divination"
+        },
+        "powerdown": {
+            "name": "decrease power",
+            "long_desc": "remove one point from the power of the current divination"
+        },
+        "reverse": {
+            "name": "reverse play",
+            "long_desc": "reverse the direction of turn-passing play"
+        },
+        "flip": {
+            "name": "reverse divination",
+            "long_desc": "flip the divination card to reverse its nature"
+        },
+        "setcount": {
+            "name": "set the countdown",
+            "long_desc": "set the divination countdown to the current number of players if it is unset"
+        },
+        "summon": {
+            "name": "summon a spirit",
+            "long_desc": "play a card from the spirit deck"
+        }
+    },
+    "divinations": [
+        {
+            "scholar": {
+                "name": "The Scholar",
+                "description": "Give two times the power level in points to the terminal player.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/scholar-fool_scholar.png"
+            },
+            "fool": {
+                "name": "The Fool",
+                "description": "Take two times the power level in points from the terminal player.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/scholar-fool_fool.png"
+            }
+        },
+        {
+            "baron": {
+                "name": "The Baron",
+                "description": "Give the power level in points to terminus-adjacent players.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/baron-pauper_baron.png"
+            },
+            "pauper": {
+                "name": "The Pauper",
+                "description": "Take the power level in points from terminus-adjacent players.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/baron-pauper_pauper.png"
+            }
+        },
+        {
+            "castor": {
+                "name": "Castor",
+                "description": "Give the power level in points to the player to the left from the terminal player, and take that number from the player to the right.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/castor-pollux_castor.png"
+            },
+            "pollux": {
+                "name": "Pollux",
+                "description": "Take the power level in points from the player to the left from the terminal player, and give that number to the player to the right.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/castor-pollux_pollux.png"
+            }
+        },
+        {
+            "gambler": {
+                "name": "The Gambler",
+                "description": "Flip a coin. If it's heads, give twice the power level in points to the terminal player. If tails, give the power level to each adjacent.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/gambler-fate_gambler.png"
+            },
+            "fate": {
+                "name": "Fate",
+                "description": "The terminating player must choose another player, then flip a coin. The total point change is double the power level, and the other player gains or loses points on heads or tails respectively.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/gambler-fate_fate.png"
+            }
+        },
+        {
+            "waxing": {
+                "name": "Waxing Crescent",
+                "description": "All players but the terminal player gain a point.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/waxing-waning_waxing.png"
+            },
+            "waning": {
+                "name": "Waning Gibbous",
+                "description": "All players but the terminal player lose a point.",
+                "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Divinations/waxing-waning_waning.png"
+            }
+        },
+    ]
+}
