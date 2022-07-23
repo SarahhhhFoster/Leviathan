@@ -1,7 +1,7 @@
 import cards
 import players
 import random
-from prompt_toolkit.shortcuts import message_dialog
+from prompt_toolkit.shortcuts import message_dialog, radiolist_dialog
 
 def powerup(this_divination, play_group, current_card, spirit_deck, spirit_deck_list):
   this_divination.change_power(1)

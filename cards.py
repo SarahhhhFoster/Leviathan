@@ -61,15 +61,7 @@ class CardDeck:
     return("\n".join(return_string))
 
   def __iter__(self):
-    return self
-
-  def __next__(self):
-    self._index += 1
-    if self._index >= len(self._cards):
-      self._index = -1
-      raise StopIteration
-    else:
-      return self._cards[self._index]
+    return CardDeckIter(deck = self)
 
   def shuffle(self):
     random.shuffle(self._cards)
@@ -115,3 +107,18 @@ class CardDeck:
   
     def __str__(self):
       return(self.message)
+
+class CardDeckIter:
+  def __init__(self, deck, start = 0):
+    self._index = start
+    self._card_deck = deck
+
+  def __next__(self):
+    index = self._index
+    deck = self._card_deck
+    self._index += 1
+    if self._index > deck.get_card_count():
+      self._index = 0
+      raise StopIteration
+    else:
+      return deck.read_card(index)

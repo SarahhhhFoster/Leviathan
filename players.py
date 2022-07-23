@@ -49,15 +49,7 @@ class PlayerGroup:
     return("\n".join(return_string))
 
   def __iter__(self):
-    return self
-
-  def __next__(self):
-    self._index += 1
-    if self._index >= len(self._players):
-      self._index = -1
-      raise StopIteration
-    else:
-      return self._players[self._index]
+    return PlayerGroupIter(group = self)
 
   def __getitem__(self, item):
     return(self._players[item])
@@ -105,3 +97,18 @@ class PlayerGroup:
   
     def __str__(self):
       return(self.message)
+
+class PlayerGroupIter:
+  def __init__(self, group, start = 0):
+    self._index = start
+    self._player_group = group
+
+  def __next__(self):
+    index = self._index
+    group = self._player_group
+    self._index += 1
+    if self._index > group.get_player_count():
+      self._index = 0
+      raise StopIteration
+    else:
+      return group.get_player_by_index(index)
