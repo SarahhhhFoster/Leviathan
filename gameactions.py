@@ -131,3 +131,25 @@ def bluff_battle(winner, loser):
   ).run()
   winner.add_to_score(score_delta)
   loser.add_to_score(score_delta * -1)
+
+dispatch_table = {
+  "powerup": powerup,
+  "powerdown": powerdown,
+  "reverse": reverse,
+  "flip": flip,
+  "setcount": setcount,
+  "addcount": addcount,
+  "subcount": subcount,
+  "endcount": endcount,
+  "summon": summon,
+  "scholar": scholar,
+  "fool": fool,
+  "baron": baron,
+  "pauper": pauper,
+  "castor": castor,
+  "pollux": pollux,
+  "gambler": gambler,
+  "fate": fate,
+  "waxing": waxing,
+  "waning": waning,
+}
