@@ -93,7 +93,7 @@ while not win_condition_met():
     else:
       winner = play_group.get_player_by_name(doubt_result)
       gameactions.bluff_battle(opponent, current_player)
-      gameactions.draw_new_profession(current_player, carddecks.profession_deck)
+    gameactions.draw_new_profession(current_player, carddecks.profession_deck)
 
   if this_divination.divination_count == 0:
     current_card.get_attr("function")[current_card.get_name()](play_group, this_divination.divination_power)
