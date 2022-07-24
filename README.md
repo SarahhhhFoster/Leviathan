@@ -16,11 +16,3 @@ At the start of the divination, a divination card is drawn by the active player 
 Any player can perform any of the above... but they're only qualified to do two without consequences. Each profession lists the set of actions in their repertoire, but in the absence of being questioned they can get away with performing any. On the other hand, if they are challenged they have to verify their skills. They have to reveal their profession to the group, and if their profession is qualified to perform the stated action they succeed and the challenger fails. Otherwise, the challenger succeeds and the current player fails. Either way, the successful player gains two points, and the unsuccessful one loses two. If they don't fail a challenge, the results of their action are processed. If a spirit is summoned, its effects are processed. If the player chooses to set the divination counter, it is set to the number of players, such that (if not interfered with) the round will end the next time it's their turn. At the end of the following turns, the counter is decreased by one. Once the counter reaches zero, the effects of the divination card are processed.
 
 This continues until someone gets enough points to end the game; 10. Once the game is complete, the true medium is revealed and, if the score difference between the top player and the bottom is less than five points, the true medium has succeeded in preventing the frauds from gaining any meaningful personal control. If the true medium succeeds, they are the winner of the game. Otherwise, the highest scorer wins. Canonically, everyone else is dead and damned. Kudos/condolences respectively.
-
-
-TODO:
-* Cosmic Horror failing to end the round
-
-CHANGES:
-* Set winning score to 10
-* Fix failure to draw new profession after failed bluff
