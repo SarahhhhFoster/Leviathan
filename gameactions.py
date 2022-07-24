@@ -32,7 +32,6 @@ def subcount(this_divination, play_group, current_card, spirit_deck, spirit_deck
     this_divination.change_count(-1)
 
 def endcount(this_divination, play_group, current_card, spirit_deck, spirit_deck_list):
-  if this_divination.divination_count < 0:
     this_divination.set_count(0)
 
 def summon(this_divination, play_group, current_card, spirit_deck, spirit_deck_list):
