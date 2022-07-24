@@ -132,6 +132,15 @@ def bluff_battle(winner, loser):
   winner.add_to_score(score_delta)
   loser.add_to_score(score_delta * -1)
 
+def draw_new_profession(player, prof_deck):
+  old_prof = player.play_from_deck(0, deck = "profession")
+  player.draw_from(prof_deck, draw_to_deck = "profession")
+  new_prof = player.read_from_deck(0, deck = "profession")
+  message_dialog(
+    title="Draw New Profession",
+    text=f"{player.name} is drawing a new profession. They were the {old_prof.get_name()}; now they are the {new_prof.get_name()}."
+  ).run()
+
 dispatch_table = {
   "powerup": powerup,
   "powerdown": powerdown,
