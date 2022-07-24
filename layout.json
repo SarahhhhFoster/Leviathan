@@ -5,105 +5,120 @@
                 "powerup",
                 "powerdown"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/numerologist.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/numerologist.png",
+            "description": "She can see the flow of power in the room... and can give it a gentle nudge if it suits her."
         },
         "palmist": {
             "abilities": [
                 "powerup",
                 "reverse"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/palmist.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/palmist.png",
+            "description": "He knows what the future holds for you. Condolences."
         },
         "clairvoyant": {
             "abilities": [
                 "powerup",
                 "flip"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/clairvoyant.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/clairvoyant.png",
+            "description": "\"I see... a family member. Let me tell them... rather, ask them what's coming.\""
         },
         "personage": {
             "abilities": [
                 "powerup",
                 "setcount"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/personage.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/personage.png",
+            "description": "The spirits ask that you not look as she prepares the seance, and that you have payment on hand before we start."
         },
         "glossolalist": {
             "abilities": [
                 "powerup",
                 "summon"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/glossolalist.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/glossolalist.png",
+            "description": "Speaking from the soul comes easy when you don't have to prepare notes in any known language."
         },
         "Thelemite": {
             "abilities": [
                 "powerdown",
                 "reverse"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/thelemite.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/thelemite.png",
+            "description": "He thinks Nuit sees this all as a mockery. He's only here for the hors d'oeuvres. And perhaps to pocket a good book."
         },
         "haruspex": {
             "abilities": [
                 "powerdown",
                 "flip"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/haruspex.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/haruspex.png",
+            "description": "\"You'll take care of the washing up once we're done, won't you? Good lad.\""
         },
         "exorcist": {
             "abilities": [
                 "powerdown",
                 "setcount"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/exorcist.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/exorcist.png",
+            "description": "With so many accursed items going up in flames, surely nobody will notice the odd one or two missing?"
         },
         "demonologist": {
             "abilities": [
                 "powerdown",
                 "summon"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/demonologist.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/demonologist.png",
+            "description": "The mask is only a precaution; he assures you this is all perfectly safe."
         },
         "theosophist": {
             "abilities": [
                 "reverse",
                 "flip"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/theosophist.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/theosophist.png",
+            "description": "\"...\""
         },
         "thaumaturge": {
             "abilities": [
                 "reverse",
                 "setcount"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/thaumaturge.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/thaumaturge.png",
+            "description": "He can assure you that your blessings will be many, and for such an affordable price."
         },
         "Fortean": {
             "abilities": [
                 "reverse",
                 "summon"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/fortean.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/fortean.png",
+            "description": "\"How DARE you question me? I've seen them! Seen them by the hundreds! With their eyes uncountable!\""
         },
         "Hermeticist": {
             "abilities": [
                 "flip",
                 "setcount"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/hermeticist.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/hermeticist.png",
+            "description": "It takes gold to make gold."
         },
         "necromancer": {
             "abilities": [
                 "flip",
                 "summon"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/necromancer.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/necromancer.png",
+            "description": "She's not much for conversation, and neither is... that?"
         },
         "doomsayer": {
             "abilities": [
                 "setcount",
                 "summon"
             ],
-            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/doomsayer.png"
+            "image": "https://f004.backblazeb2.com/file/Leviathan-Game/Classes/doomsayer.png",
+            "description": "\"IT'S ALL ENDING IT'S ALL OVER OH SPIRITS PLEASE RELEASE oh yes, another sherry would be lovely thank you OH ANCIENT GODS SPARE THIS PLACE\""
         }
     },
     "powers": {
