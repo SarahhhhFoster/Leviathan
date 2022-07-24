@@ -19,7 +19,7 @@ This continues until someone gets enough points to end the game; 10. Once the ga
 
 
 TODO:
-* Cosmic Horror failing to end the round
+* Cosmic Horror failing to end the round if the counter has been set
 
 CHANGES:
 * Set winning score to 10
